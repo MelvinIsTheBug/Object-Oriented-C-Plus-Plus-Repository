@@ -1,5 +1,5 @@
 /*** 
-{Learning c++ or something}
+{Prints two distinct lines"Hello World"}
 */
 
 #include <iostream>

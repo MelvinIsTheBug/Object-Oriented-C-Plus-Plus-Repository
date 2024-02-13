@@ -1,6 +1,6 @@
 //Lab2_num_obj.cpp
 /***
- * {Displays the bit size of math things, characters, and booleans}
+ * {Displays the byte size of math things, characters, and booleans}
 */
 
 #include <iostream>
@@ -14,7 +14,7 @@ int main() {
     double double_example = 2.0;
 
     //non-numerical
-    char char_example = 'a'
+    char char_example = 'a';
     bool bool_example = true;
 
     //sizeof retruns the number of bytes (8 bits is equivalent to 1 byte)

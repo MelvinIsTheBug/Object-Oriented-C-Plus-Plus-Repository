@@ -16,9 +16,8 @@ class RPG {
         void printAction(string, RPG);
         void updateHealth(int new_health);
         
-        //attack currently not in use
+        
         void attack(RPG *);
-        //useSkill currently not in use
         void useSkill(RPG *);
 
         bool isAlive() const;

@@ -1,4 +1,5 @@
 #include "RPG.h"
+#include <iostream>
 
 /**
  * @brief Construct a new RPG:: RPG object
@@ -8,7 +9,7 @@ RPG::RPG()
 {
    name = "NPC";
    health = 100;
-   strength = 10;
+   strength = 33;
    defense = 10;
    type = "warrior";
    skills[0] = "slash";
@@ -66,6 +67,51 @@ int RPG::getDefense() const
 }
 
 /**
+ * @brief attack decreases the opponent's health by (strength- opponents defense)
+ * 
+ * @param opponent
+*/
+void RPG::attack(RPG * opponent){
+    int opp_health = (*opponent).getHealth();
+    int opp_def = (*opponent).getDefense();
+
+    if (strength - opp_def > 0) {
+        int new_health = opp_health - (strength - opp_def);
+        (*opponent).updateHealth(new_health);
+    } else {
+        int new_health = opp_health - 0;
+        (*opponent).updateHealth(new_health); 
+    }
+
+}
+
+/**
+* @brief Prompts the user to choose a skill and calls printAction() and attack()
+*
+* @param opponent
+*/
+void RPG::useSkill(RPG * opponent){
+    for(int i=0; i < SKILL_SIZE; i++){
+        printf("Skill %i: %s\n", i, skills[i].c_str());
+    }
+
+    //int created 
+    int chosen_skill_index;
+
+    //prompts user to choose skill
+    printf("Choose a skill to use: Enter 0 or 1\n");
+
+    // takes user input for chosen_skill_index
+    cin >> chosen_skill_index;
+
+    //chosen skill assigned to a string 
+    string chosen_skill = skills[chosen_skill_index];
+
+    printAction( chosen_skill, *opponent);
+    attack(opponent);
+}
+
+/**
  * @brief sets the skills based on the RPG's role
  * 
 */
@@ -80,10 +126,13 @@ void RPG::setSkills() {
     } else if (type == "archer"){
         skills[0] = "parry";
         skills[1] = "crossbow_attack";
-    } else if (type == "Quit this Game Nerd"){
+    } else if (type == "Final Boss"){
         skills[0] = "Instant Elimination";
-        skills[1] = "Unfair, Unblockable Instant Kill";
-    } else{
+        skills[1] = "Unfair, Unblockable Instant Kill";     
+    } else if (type == "GOD"){
+        skills[0] = "Judgement";
+        skills[1] = "Straight to the Gates";
+    }   else{
         skills[0] = "slash";
         skills[1] = "parry";
     }
@@ -113,6 +162,6 @@ void RPG::updateHealth(int new_health) {
  * @return False
 */
 bool RPG::isAlive() const {
-    return isAlive();
+    return health > 0;
 }
 

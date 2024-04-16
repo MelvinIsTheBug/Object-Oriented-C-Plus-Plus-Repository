@@ -8,9 +8,9 @@ using namespace std;
  * @param v - vector of integers
 */
 void printMemVec(vector<int> vec){
-    printf("Vector - Each int is worth %lu bytes\n");
+    printf("Vector - Each int is worth %lu bytes\n", sizeof(vec[0]));
     for (int i = 0; i < vec.size(); i++) {
-         printf("Value :%i at Memory Location: %p\n", vec[i] += i);
+        printf("Value :%i at Memory Location: %p\n", vec[i], &vec + i);
     }
 
 }
@@ -34,24 +34,22 @@ int main() {
     }
 
     printf("Before increment----------\n");
-
     printMemVec(vec);
+
     incVecBy10(vec);
-
-
     printf("After increment---------\n");
     printMemVec(vec);
-    
-    //remove last elements of vec
 
-    
+
+    vec.pop_back();
     printf("After Pop----------\n");
-    //call printMemVec() on vec again to view changes
-
+    printMemVec(vec);
 
     //append 101 and 102 at the end of vec
-
+    vec.push_back(101);
+    vec.push_back(102);
     printf("After push----------\n");
-    //call printMemVec() on vec again to view the changes
-
+    printMemVec(vec);
+    
+    return 0;
 }
